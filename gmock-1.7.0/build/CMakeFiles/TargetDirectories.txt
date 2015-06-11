@@ -1,4 +1,0 @@
-/home/l/Bin/gmock-1.7.0/build/CMakeFiles/gmock.dir
-/home/l/Bin/gmock-1.7.0/build/CMakeFiles/gmock_main.dir
-/home/l/Bin/gmock-1.7.0/build/gtest/CMakeFiles/gtest.dir
-/home/l/Bin/gmock-1.7.0/build/gtest/CMakeFiles/gtest_main.dir

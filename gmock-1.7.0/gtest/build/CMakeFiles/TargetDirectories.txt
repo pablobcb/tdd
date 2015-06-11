@@ -1,2 +1,0 @@
-/home/l/Workspace/tdd/gmock-1.7.0/gtest/b/CMakeFiles/gtest.dir
-/home/l/Workspace/tdd/gmock-1.7.0/gtest/b/CMakeFiles/gtest_main.dir
