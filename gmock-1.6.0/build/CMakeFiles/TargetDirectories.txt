@@ -1,0 +1,4 @@
+/home/l/Downloads/gmock-1.6.0/build/CMakeFiles/gmock.dir
+/home/l/Downloads/gmock-1.6.0/build/CMakeFiles/gmock_main.dir
+/home/l/Downloads/gmock-1.6.0/build/gtest/CMakeFiles/gtest.dir
+/home/l/Downloads/gmock-1.6.0/build/gtest/CMakeFiles/gtest_main.dir
