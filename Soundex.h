@@ -9,7 +9,11 @@ public:
 
 
 private:
-  std::string padWithZero(const std::string& word ) const;
+    std::string head(const std::string& word ) const;
+
+    std::string padWithZero(const std::string& word ) const;
+
+    std::string encodeDigits(const std::string& word ) const;
 };
 
 #endif
