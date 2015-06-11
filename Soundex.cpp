@@ -5,7 +5,7 @@
 
 std::string Soundex::encode(const std::string& word) const
 {
-  return padWithZero(head(word) + encodeDigits(word));
+  return padWithZero( head ( word ) + encodeDigits( tail( word ) ) );
 }
 
 std::string Soundex::padWithZero(const std::string& word ) const
@@ -18,10 +18,18 @@ std::string Soundex::padWithZero(const std::string& word ) const
 
 std::string Soundex::encodeDigits( const std::string& word ) const
 {
-    if( word.length() > 1)
-      return encodeDigit(word[1]);
+    if( word.empty() )
+        return "";
 
-    return "";
+    std::string encoding = "";
+
+    for ( size_t i = 0 ; i < word.size() ; i++ )
+    {
+      encoding += encodeDigit( word[ i ] );
+    }
+
+    return encoding;
+
 }
 
 std::string Soundex::encodeDigit( char letter ) const
@@ -55,6 +63,8 @@ std::string Soundex::encodeDigit( char letter ) const
     encodings.insert( std::make_pair( 'd', "3" ) );
 
     encodings.insert( std::make_pair( 't', "3" ) );
+    
+    encodings.insert( std::make_pair( 'l', "4" ) );
 
     encodings.insert( std::make_pair( 'm', "5" ) );
 
@@ -69,4 +79,10 @@ std::string Soundex::encodeDigit( char letter ) const
 std::string Soundex::head( const std::string& word ) const
 {
     return word.substr( 0, 1 );
+}
+
+
+std::string Soundex::tail( const std::string& word ) const
+{
+    return word.substr( 1 );
 }

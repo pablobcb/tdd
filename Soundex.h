@@ -11,6 +11,8 @@ public:
 private:
     std::string head(const std::string& word ) const;
 
+    std::string tail(const std::string& word ) const;
+
     std::string padWithZero(const std::string& word ) const;
 
     std::string encodeDigits(const std::string& word ) const;
