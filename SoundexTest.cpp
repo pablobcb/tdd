@@ -20,5 +20,9 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
 
 TEST_F(SoundexEncoding, ReplaceConsonantsWithAppropriateDigits) {
 
-    ASSERT_THAT(soundex.encode("Ab"), testing::Eq("A100"));
+    EXPECT_THAT(soundex.encode("Ax"), testing::Eq("A200"));
+}
+
+TEST_F(SoundexEncoding, IgnoresNonAlphabetics) {
+    ASSERT_THAT(soundex.encode("A#"), testing::Eq("A000"));
 }

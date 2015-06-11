@@ -14,6 +14,8 @@ private:
     std::string padWithZero(const std::string& word ) const;
 
     std::string encodeDigits(const std::string& word ) const;
+
+    std::string encodeDigit( char letter ) const;
 };
 
 #endif
