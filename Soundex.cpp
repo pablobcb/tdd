@@ -16,21 +16,26 @@ std::string Soundex::padWithZero(const std::string& word ) const
 }
 
 
+bool Soundex::isComplete( const std::string& encoding ) const
+{
+    return encoding.length() == MAX_CODE_LENGTH - 1;
+}
+
 std::string Soundex::encodeDigits( const std::string& word ) const
 {
-    if( word.empty() )
-        return "";
-
     std::string encoding = "";
 
     for ( size_t i = 0 ; i < word.size() ; i++ )
     {
-      encoding += encodeDigit( word[ i ] );
+        if ( isComplete( encoding ) )
+            break;
+
+        encoding += encodeDigit( word[ i ] );
     }
 
     return encoding;
-
 }
+
 
 std::string Soundex::encodeDigit( char letter ) const
 {
