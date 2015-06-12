@@ -5,7 +5,9 @@
 class Soundex
 {
 public:
-  std::string encode(const std::string& word) const;
+    std::string encode(const std::string& word) const;
+
+    std::string encodeDigit( char letter ) const;
 
 
 private:
@@ -18,8 +20,6 @@ private:
     bool isComplete( const std::string& enconding ) const;
 
     std::string encodeDigits( const std::string& word ) const;
-
-    std::string encodeDigit( char letter ) const;
 };
 
 #endif
