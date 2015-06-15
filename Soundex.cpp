@@ -3,11 +3,6 @@
 
 #define MAX_CODE_LENGTH 4
 
-std::string Soundex::encode(const std::string& word) const
-{
-  return padWithZero( head ( word ) + encodeDigits( tail( word ) ) );
-}
-
 std::string Soundex::padWithZero(const std::string& word ) const
 {
     size_t zerosNeeded = MAX_CODE_LENGTH - word.length();
@@ -21,19 +16,10 @@ bool Soundex::isComplete( const std::string& encoding ) const
     return encoding.length() == MAX_CODE_LENGTH - 1;
 }
 
-std::string Soundex::encodeDigits( const std::string& word ) const
+
+std::string Soundex::encode(const std::string& word) const
 {
-    std::string encoding = "";
-
-    for ( size_t i = 0 ; i < word.size() ; i++ )
-    {
-        if ( isComplete( encoding ) )
-            break;
-
-        encoding += encodeDigit( word[ i ] );
-    }
-
-    return encoding;
+  return padWithZero( head ( word ) + encodeDigits( tail( word ) ) );
 }
 
 
@@ -79,6 +65,32 @@ std::string Soundex::encodeDigit( char letter ) const
 
     return encodings[ letter ];
 
+}
+
+std::string Soundex::encodeDigits( const std::string& word ) const
+{
+    std::string encoding = "";
+
+    for ( size_t i = 0 ; i < word.size() ; i++ )
+    {
+        if ( isComplete( encoding ) )
+            break;
+        
+        char letter = word[ i ];
+
+        if( encodeDigit( letter ) != lastDigit( encoding ) )
+            encoding += encodeDigit( letter );
+    }
+
+    return encoding;
+}
+
+std::string Soundex::lastDigit( const std::string& encoding ) const
+{
+    if ( encoding.empty() )
+        return "";
+
+    return std::string( 1, encoding[ encoding.size() -1 ] );
 }
 
 std::string Soundex::head( const std::string& word ) const
