@@ -45,10 +45,6 @@ TEST_F(SoundexEncoding, LimitsLengthToFourCharacters)
     ASSERT_THAT( soundex.encode( "Dcdlb" ).length(), testing::Eq( 4u ) );
 }
 
-TEST_F( SoundexEncoding, IgnoresVowelLikeLetters)
-{
-    ASSERT_THAT( soundex.encode( "Baeiouhycdl" ), testing::Eq( "B234" ) );
-}
 
 TEST_F( SoundexEncoding, CombinesDuplicateEncodings )
 {
@@ -63,4 +59,9 @@ TEST_F( SoundexEncoding, CombinesDuplicateEncodings )
 
 TEST_F( SoundexEncoding, UppercasesFirstLetter ) {
     ASSERT_THAT( soundex.encode( "abcd" ), testing::StartsWith( "A" ) );
+}
+
+
+TEST_F( SoundexEncoding, IgnoresVowelLikeLetters ) {
+    ASSERT_THAT( soundex.encode( "BaAeEiIoOuUhHyYcdl" ), testing::Eq( "B234" ) );
 }
