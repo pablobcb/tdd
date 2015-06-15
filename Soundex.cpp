@@ -19,7 +19,9 @@ bool Soundex::isComplete( const std::string& encoding ) const
 
 std::string Soundex::encode(const std::string& word) const
 {
-  return padWithZero( head ( word ) + encodeDigits( tail( word ) ) );
+    return padWithZero(
+        upperFront( head ( word ) ) + encodeDigits( tail( word ) ) 
+    );
 }
 
 
@@ -102,4 +104,10 @@ std::string Soundex::head( const std::string& word ) const
 std::string Soundex::tail( const std::string& word ) const
 {
     return word.substr( 1 );
+}
+
+std::string Soundex::upperFront( const std::string& str ) const
+{
+    return std::string( 1
+         , std::toupper( static_cast< unsigned char >( str[ 0 ] ) ) );
 }

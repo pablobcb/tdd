@@ -11,6 +11,8 @@ public:
 
 
 private:
+    std::string upperFront( const std::string& str ) const;
+
     std::string head( const std::string& word ) const;
 
     std::string tail( const std::string& word ) const;

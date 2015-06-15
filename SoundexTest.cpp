@@ -60,3 +60,7 @@ TEST_F( SoundexEncoding, CombinesDuplicateEncodings )
 
     ASSERT_THAT( soundex.encode( "Abfcgdt" ), testing::Eq( "A123") );
 }
+
+TEST_F( SoundexEncoding, UppercasesFirstLetter ) {
+    ASSERT_THAT( soundex.encode( "abcd" ), testing::StartsWith( "A" ) );
+}
