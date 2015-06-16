@@ -18,15 +18,17 @@ std::string Soundex::padWithZero(const std::string& word ) const
 
 bool Soundex::isComplete( const std::string& encoding ) const
 {
-    return encoding.length() == maxCodeLength;
+    return encoding.length() == maxCodeLength - 1;
 }
 
 
 std::string Soundex::encode(const std::string& word) const
 {
-    return padWithZero(
-        upper( head ( word ) ) + encodeDigits( tail( word ) )
-    );
+    char front = upper( head ( word ) );
+
+    std::string rest = encodeDigits( tail( word ) );
+
+    return padWithZero(front + rest);
 }
 
 
@@ -93,15 +95,17 @@ std::string Soundex::encodeDigits( const std::string& tail ) const
     printf("[size]:  %d \n", tail.size());
     for ( size_t i = 0 ; i < tail.size() ; i++ )
     {
+
         if ( isComplete( encoding ) )
             break;
 
         const char digit = encodeDigit( tail[ i ] );
         const char last= lastDigit( encoding );
 
+        printf("[word[%d]]:  %c \n", i, digit);
         if ( digit != notDigit 
           //&& last != notDigit
-          //&& last != digit
+          && last != digit
         ){
             encoding += digit;
         }

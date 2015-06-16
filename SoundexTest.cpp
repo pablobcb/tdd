@@ -39,23 +39,23 @@ TEST_F( SoundexEncoding, ReplacesMultipleConsonantsWithDigits )
 }
 
 
-//TEST_F(SoundexEncoding, LimitsLengthToFourCharacters)
-//{
-//    ASSERT_THAT( soundex.encode( "Dcdlb" ).length(), testing::Eq( 4u ) );
-//}
-//
-//
-//TEST_F( SoundexEncoding, CombinesDuplicateEncodings )
-//{
-//    ASSERT_THAT( soundex.encodeDigit( 'b' ), testing::Eq( soundex.encodeDigit( 'f' ) ) );
-//    
-//    ASSERT_THAT( soundex.encodeDigit( 'c' ), testing::Eq( soundex.encodeDigit( 'g' ) ) );
-//    
-//    ASSERT_THAT( soundex.encodeDigit( 'd' ), testing::Eq( soundex.encodeDigit( 't' ) ) );
-//
-//    ASSERT_THAT( soundex.encode( "Abfcgdt" ), testing::Eq( "A123") );
-//}
-//
+TEST_F(SoundexEncoding, LimitsLengthToFourCharacters)
+{
+    ASSERT_THAT( soundex.encode( "Dcdlb" ).length(), testing::Eq( 4u ) );
+}
+
+
+TEST_F( SoundexEncoding, CombinesDuplicateEncodings )
+{
+    ASSERT_THAT( soundex.encodeDigit( 'b' ), testing::Eq( soundex.encodeDigit( 'f' ) ) );
+    
+    ASSERT_THAT( soundex.encodeDigit( 'c' ), testing::Eq( soundex.encodeDigit( 'g' ) ) );
+    
+    ASSERT_THAT( soundex.encodeDigit( 'd' ), testing::Eq( soundex.encodeDigit( 't' ) ) );
+
+    ASSERT_THAT( soundex.encode( "Abfcgdt" ), testing::Eq( "A123") );
+}
+
 //TEST_F( SoundexEncoding, UppercasesFirstLetter ) {
 //    ASSERT_THAT( soundex.encode( "abcd" ), testing::StartsWith( "A" ) );
 //}
