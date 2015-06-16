@@ -85,31 +85,49 @@ char Soundex::encodeDigit( const char letter ) const
     return c;
 }
 
-std::string Soundex::encodeDigits( const std::string& word ) const
+
+std::string Soundex::encodeHead( const std::string& word ) const
 {
-    const char front = lower(word[0]);
+    const char front = lower( word[ 0 ] );
 
-    std::string rest = tail(word);
+    std::string rest = tail( word );
 
-    if (front == rest[0])
-        rest = tail(rest);
+    if ( front == rest[ 0 ] )
+        rest = tail( rest );
 
+    return rest;
+}
+
+std::string Soundex::encodeTail( const std::string& word ) const
+{
     std::string encoding = "";
 
-    for ( size_t i = 0 ; i < rest.size() ; i++ )
+    for ( size_t i = 0 ; i < word.size() ; i++ )
     {
         if ( isComplete( encoding ) )
             break;
-
-        const char digit= encodeDigit( rest[ i ] );
-        const char last  = lastDigit( encoding );
-
-        if ( digit != notDigit && last != digit)
-            encoding += digit;
+        encodeLetter( encoding, word[ i ]);
     }
 
     return encoding;
 }
+
+void Soundex::encodeLetter(std::string& encoding, const char letter) const
+{
+    const char digit = encodeDigit( letter );
+    const char last  = lastDigit( encoding );
+
+    if ( digit != notDigit && last != digit)
+      encoding += digit;
+
+}
+
+
+std::string Soundex::encodeDigits( const std::string& word ) const
+{
+    return encodeTail( encodeHead( word ) );
+}
+
 
 char Soundex::lastDigit( const std::string& encoding ) const
 {

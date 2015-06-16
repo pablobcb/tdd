@@ -21,11 +21,18 @@ private:
 
     std::string tail( const std::string& word ) const;
 
+    std::string encodeHead( const std::string& word ) const;
+
+    std::string encodeTail( const std::string& word ) const;
+
+    void encodeLetter( std::string& enconding, const char letter ) const;
+
     char lastDigit( const std::string& word ) const;
 
     char lower(char c) const;
 
     char upper(char c) const;
+
 };
 
 #endif
