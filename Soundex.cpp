@@ -1,11 +1,15 @@
 #include "Soundex.h"
 #include <map>
+//#include <boost\assign.hpp>
 
-#define MAX_CODE_LENGTH 4
+const size_t maxCodeLength = 4 ;
+
+char notDigit = '*';
+
 
 std::string Soundex::padWithZero(const std::string& word ) const
 {
-    size_t zerosNeeded = MAX_CODE_LENGTH - word.length();
+    size_t zerosNeeded = maxCodeLength - word.length();
 
     return word + std::string(zerosNeeded, '0');
 }
@@ -13,7 +17,7 @@ std::string Soundex::padWithZero(const std::string& word ) const
 
 bool Soundex::isComplete( const std::string& encoding ) const
 {
-    return encoding.length() == MAX_CODE_LENGTH - 1;
+    return encoding.length() == maxCodeLength - 1;
 }
 
 
@@ -28,6 +32,7 @@ std::string Soundex::encode(const std::string& word) const
 std::string Soundex::encodeDigit( char letter ) const
 {
     std::map< char, std::string > encodings;
+    // = boost::assign::map_list_of(1 , new MyObject(1))(2, new MyObject(2))(3, new MyObject(3));s
 
     encodings.insert( std::make_pair( 'b', "1" ) );
 
@@ -56,7 +61,7 @@ std::string Soundex::encodeDigit( char letter ) const
     encodings.insert( std::make_pair( 'd', "3" ) );
 
     encodings.insert( std::make_pair( 't', "3" ) );
-    
+
     encodings.insert( std::make_pair( 'l', "4" ) );
 
     encodings.insert( std::make_pair( 'm', "5" ) );
@@ -64,6 +69,9 @@ std::string Soundex::encodeDigit( char letter ) const
     encodings.insert( std::make_pair( 'n', "5" ) );
 
     encodings.insert( std::make_pair( 'r', "6" ) );
+
+    if( encodings[ letter ] == "" )
+        return std::string(1, notDigit);
 
     return encodings[ letter ];
 
@@ -77,11 +85,11 @@ std::string Soundex::encodeDigits( const std::string& word ) const
     {
         if ( isComplete( encoding ) )
             break;
-        
-        char letter = word[ i ];
 
-        if( encodeDigit( letter ) != lastDigit( encoding ) )
-            encoding += encodeDigit( letter );
+        char digit = word[ i ];
+
+        if( digit != notDigit && encodeDigit( digit ) != lastDigit( encoding ) )
+            encoding += encodeDigit( digit );
     }
 
     return encoding;
@@ -90,7 +98,7 @@ std::string Soundex::encodeDigits( const std::string& word ) const
 std::string Soundex::lastDigit( const std::string& encoding ) const
 {
     if ( encoding.empty() )
-        return "";
+        return std::string(1, notDigit);
 
     return std::string( 1, encoding[ encoding.size() -1 ] );
 }
