@@ -26,7 +26,7 @@ std::string Soundex::encode(const std::string& word) const
 {
     char front = upper( head ( word ) );
 
-    std::string rest = encodeDigits( tail( word ) );
+    std::string rest = encodeDigits( word );
 
     return padWithZero(front + rest);
 }
@@ -85,39 +85,29 @@ char Soundex::encodeDigit( const char letter ) const
     return c;
 }
 
-std::string Soundex::encodeDigits( const std::string& tail ) const
+std::string Soundex::encodeDigits( const std::string& word ) const
 {
-    printf("[tail]:  %s \n", tail.c_str());
+    const char front = lower(word[0]);
+
+    std::string rest = tail(word);
+
+    if (front == rest[0])
+        rest = tail(rest);
+
     std::string encoding = "";
-    //encoding += encodeDigit( tail[ 0 ] );
 
-
-    printf("[size]:  %d \n", tail.size());
-    for ( size_t i = 0 ; i < tail.size() ; i++ )
+    for ( size_t i = 0 ; i < rest.size() ; i++ )
     {
-
         if ( isComplete( encoding ) )
             break;
 
-        const char digit = encodeDigit( tail[ i ] );
-        const char last= lastDigit( encoding );
+        const char digit= encodeDigit( rest[ i ] );
+        const char last  = lastDigit( encoding );
 
-        printf("[word[%d]]:  %c \n", i, digit);
-        if ( digit != notDigit 
-          //&& last != notDigit
-          && last != digit
-        ){
+        if ( digit != notDigit && last != digit)
             encoding += digit;
-        }
-        //printf("[word[%d]]:  %c \n", i, digit);
-//
-//        //printf("[digit]:  %c \n", digit);
-//        //printf("[last digit]: %c \n" , lastDigit(encoding));
-        //printf("[encoding]:  %s\n", encoding.c_str());
-
     }
 
-    printf("[ret encoding]:  %s\n", encoding.c_str());
     return encoding;
 }
 

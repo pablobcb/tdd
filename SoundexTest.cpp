@@ -56,20 +56,20 @@ TEST_F( SoundexEncoding, CombinesDuplicateEncodings )
     ASSERT_THAT( soundex.encode( "Abfcgdt" ), testing::Eq( "A123") );
 }
 
-//TEST_F( SoundexEncoding, UppercasesFirstLetter ) {
-//    ASSERT_THAT( soundex.encode( "abcd" ), testing::StartsWith( "A" ) );
-//}
-//
-//
-//TEST_F( SoundexEncoding, IgnoresVowelLikeLetters ) {
-//    ASSERT_THAT( soundex.encode( "BaAeEiIoOuUhHyYcdl" ), testing::Eq( "B234" ) );
-//}
-//
-//TEST_F( SoundexEncoding, IgnoresCaseWhenEncodingConsonants ) {
-//    ASSERT_THAT( soundex.encode("BCDL"), testing::Eq( soundex.encode( "Bcdl" ) ) );
-//}
-//
-//
-//TEST_F( SoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st ) {
-//    ASSERT_THAT( soundex.encode( "Bbcd" ), testing::Eq( "B230" ) );
-//}
+TEST_F( SoundexEncoding, UppercasesFirstLetter ) {
+    ASSERT_THAT( soundex.encode( "abcd" ), testing::StartsWith( "A" ) );
+}
+
+
+TEST_F( SoundexEncoding, IgnoresVowelLikeLetters ) {
+    ASSERT_THAT( soundex.encode( "BaAeEiIoOuUhHyYcdl" ), testing::Eq( "B234" ) );
+}
+
+TEST_F( SoundexEncoding, IgnoresCaseWhenEncodingConsonants ) {
+    ASSERT_THAT( soundex.encode("BCDL"), testing::Eq( soundex.encode( "Bcdl" ) ) );
+}
+
+
+TEST_F( SoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st ) {
+    ASSERT_THAT( soundex.encode( "Bbcd" ), testing::Eq( "B230" ) );
+}
