@@ -11,6 +11,11 @@ public:
 
 
 private:
+
+    char lower(char c) const;
+
+    char upper(char c) const;
+
     std::string upperFront( const std::string& str ) const;
 
     std::string head( const std::string& word ) const;

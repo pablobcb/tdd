@@ -29,7 +29,7 @@ std::string Soundex::encode(const std::string& word) const
 }
 
 
-std::string Soundex::encodeDigit( char letter ) const
+std::string Soundex::encodeDigit( const char letter ) const
 {
     std::map< char, std::string > encodings;
     // = boost::assign::map_list_of(1 , new MyObject(1))(2, new MyObject(2))(3, new MyObject(3));s
@@ -70,10 +70,12 @@ std::string Soundex::encodeDigit( char letter ) const
 
     encodings.insert( std::make_pair( 'r', "6" ) );
 
-    if( encodings[ letter ] == "" )
+    const char loweredLetter = lower(letter);
+
+    if( encodings[ loweredLetter ] == "" )
         return std::string(1, notDigit);
 
-    return encodings[ letter ];
+    return encodings[ loweredLetter ];
 
 }
 
@@ -103,6 +105,7 @@ std::string Soundex::lastDigit( const std::string& encoding ) const
     return std::string( 1, encoding[ encoding.size() -1 ] );
 }
 
+
 std::string Soundex::head( const std::string& word ) const
 {
     return word.substr( 0, 1 );
@@ -114,8 +117,18 @@ std::string Soundex::tail( const std::string& word ) const
     return word.substr( 1 );
 }
 
+
+char Soundex::lower( const char c ) const {
+    return std::tolower( static_cast< unsigned char >( c ) );
+}
+
+
+char Soundex::upper( const char c ) const {
+    return std::toupper( static_cast< unsigned char >( c ) ) ;
+}
+
+
 std::string Soundex::upperFront( const std::string& str ) const
 {
-    return std::string( 1
-         , std::toupper( static_cast< unsigned char >( str[ 0 ] ) ) );
+    return std::string( 1, upper ( str[ 0 ] ) );
 }

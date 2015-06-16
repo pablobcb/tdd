@@ -65,3 +65,7 @@ TEST_F( SoundexEncoding, UppercasesFirstLetter ) {
 TEST_F( SoundexEncoding, IgnoresVowelLikeLetters ) {
     ASSERT_THAT( soundex.encode( "BaAeEiIoOuUhHyYcdl" ), testing::Eq( "B234" ) );
 }
+
+TEST_F( SoundexEncoding, IgnoresCaseWhenEncodingConsonants ) {
+    ASSERT_THAT( soundex.encode("BCDL"), testing::Eq( soundex.encode( "Bcdl" ) ) );
+}
