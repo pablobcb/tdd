@@ -106,22 +106,29 @@ std::string Soundex::encodeTail( const std::string& word ) const
     {
         if ( isComplete( encoding ) )
             break;
-        encodeLetter( encoding, word[ i ]);
+        encodeLetter( encoding, word[ i ], word[ i - 1]);
     }
 
     return encoding;
 }
 
-void Soundex::encodeLetter(std::string& encoding, const char letter) const
+void Soundex::encodeLetter(std::string& encoding,
+  const char letter, const char lastLetter) const
 {
     const char digit = encodeDigit( letter );
     const char last  = lastDigit( encoding );
 
-    if ( digit != notDigit && last != digit)
+    if ( digit != notDigit && 
+       ( last != digit || isVowel( lastLetter ) )
+    )
       encoding += digit;
 
 }
 
+bool Soundex::isVowel( const char letter ) const
+{
+    return std::string("aeiouy").find(lower(letter)) != std::string::npos;
+}
 
 std::string Soundex::encodeDigits( const std::string& word ) const
 {

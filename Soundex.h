@@ -25,7 +25,9 @@ private:
 
     std::string encodeTail( const std::string& word ) const;
 
-    void encodeLetter( std::string& enconding, const char letter ) const;
+    void encodeLetter( std::string& enconding, const char letter, const char lastLetter ) const;
+
+    bool isVowel( const char word ) const;
 
     char lastDigit( const std::string& word ) const;
 
